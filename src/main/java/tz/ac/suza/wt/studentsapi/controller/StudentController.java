@@ -1,0 +1,39 @@
+package tz.ac.suza.wt.studentsapi.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import tz.ac.suza.wt.studentsapi.model.Student;
+import tz.ac.suza.wt.studentsapi.services.StudentServices;
+
+@RestController
+@RequestMapping("/api/v1/students")
+public class StudentController {
+    private final StudentServices studentServices;
+    public StudentController(StudentServices studentServices) {
+        this.studentServices = studentServices;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Student>> getAllStudents()
+    {
+        List<Student> students = (List<Student>)studentServices.getAllStudents();
+        return ResponseEntity.ok(students);
+
+
+
+    // @GetMapping("/api/v1/")
+    // public String welcome() {
+    //     return "Welcome to Students API";
+    // }
+    // @GetMapping("/api/v1/message")
+    // public ResponseEntity<Map<String,String>> getMessage(){
+    //     return ResponseEntity.ok(Map.of("message","Welcome to Students API"));
+    // }
+}
+}
