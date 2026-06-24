@@ -36,4 +36,20 @@ public class StudentServices {
 
     }
 
+    public void deleteStudent(Long id) {
+        if (!studentRepository.existsById(id)) {
+            throw new RuntimeException("Student not found with id: " + id);
+        }
+        studentRepository.deleteById(id);
+    }
+
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    }
+
+    public List<Student> getByCourseAndYear(String course, Integer year) {
+        return studentRepository.findByCourseAndYear(course, year);
+    }
+
 }

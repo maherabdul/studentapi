@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import tz.ac.suza.wt.studentsapi.services.StudentServices;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/v1/students")
@@ -49,6 +51,23 @@ public class StudentController {
     @PutMapping("/{id}")
     public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody Student student) {
         return ResponseEntity.ok(studentServices.updateStudent(id, student));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        studentServices.deleteStudent(id);
+        return ResponseEntity.noContent().build();
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
+        return ResponseEntity.ok(studentServices.getStudentById(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Student>> getByCourseAndYear(@RequestParam String course, @RequestParam Integer year) {
+        return ResponseEntity.ok(studentServices.getByCourseAndYear(course, year));
     }
 
 }
