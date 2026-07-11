@@ -10,19 +10,19 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="students")
-public class Student {
+@Table(name = "courses")
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false,length=100)
+    @Column(nullable = false, unique = true, length = 20)
+    private String code;
+
+    @Column(nullable = false, length = 200)
     private String name;
 
-    @Column(nullable=false,unique=true,length=150)
-    private String email;
-
-    @Column(nullable=false)
-    private Integer year;
+    @Column(nullable = false)
+    private Integer credits;
 
 }

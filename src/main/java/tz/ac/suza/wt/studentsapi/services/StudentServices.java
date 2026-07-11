@@ -2,7 +2,6 @@ package tz.ac.suza.wt.studentsapi.services;
 
 import java.util.List;
 
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import tz.ac.suza.wt.studentsapi.model.Student;
@@ -30,7 +29,6 @@ public class StudentServices {
                 .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
         existingStudent.setName(student.getName());
         existingStudent.setEmail(student.getEmail());
-        existingStudent.setCourse(student.getCourse());
         existingStudent.setYear(student.getYear());
         return studentRepository.save(existingStudent);
 
@@ -48,8 +46,8 @@ public class StudentServices {
                 .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
     }
 
-    public List<Student> getByCourseAndYear(String course, Integer year) {
-        return studentRepository.findByCourseAndYear(course, year);
+    public List<Student> getByYear(Integer year) {
+        return studentRepository.findByYear(year);
     }
 
 }

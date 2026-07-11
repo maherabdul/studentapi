@@ -1,7 +1,6 @@
 package tz.ac.suza.wt.studentsapi.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,8 +65,8 @@ public class StudentController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Student>> getByCourseAndYear(@RequestParam String course, @RequestParam Integer year) {
-        return ResponseEntity.ok(studentServices.getByCourseAndYear(course, year));
+    public ResponseEntity<List<Student>> getByYear(@RequestParam Integer year) {
+        return ResponseEntity.ok(studentServices.getByYear(year));
     }
 
 }

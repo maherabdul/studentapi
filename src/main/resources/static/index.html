@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students API - CRUD Client</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Students API</h1>
+        <p>A JavaScript <code>fetch()</code> client for the Spring Boot REST API</p>
+    </header>
+
+    <!-- Tab buttons to switch between the three resources -->
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="students">Students</button>
+        <button class="tab-btn" data-tab="courses">Courses</button>
+        <button class="tab-btn" data-tab="enrollments">Enrollments</button>
+    </nav>
+
+    <!-- Message area for success / error feedback -->
+    <div id="message" class="message hidden"></div>
+
+    <!-- ==================== STUDENTS ==================== -->
+    <section id="students" class="tab-panel">
+        <div class="panel-grid">
+            <div class="card">
+                <h2 id="student-form-title">Add Student</h2>
+                <form id="student-form">
+                    <!-- Hidden id: empty means "create", filled means "update" -->
+                    <input type="hidden" id="student-id">
+                    <label for="student-name">Name</label>
+                    <input type="text" id="student-name" required maxlength="100">
+                    <label for="student-email">Email</label>
+                    <input type="email" id="student-email" required maxlength="150">
+                    <label for="student-year">Year</label>
+                    <input type="number" id="student-year" required min="2000" max="2100" placeholder="e.g. 2026">
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">Save</button>
+                        <button type="button" class="btn" id="student-cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>All Students</h2>
+                    <div class="search-box">
+                        <input type="number" id="student-search-year" placeholder="Filter by year (e.g. 2026)" min="2000" max="2100">
+                        <button class="btn" id="student-search-btn">Search</button>
+                        <button class="btn" id="student-search-reset">Reset</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Year</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="students-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COURSES ==================== -->
+    <section id="courses" class="tab-panel hidden">
+        <div class="panel-grid">
+            <div class="card">
+                <h2 id="course-form-title">Add Course</h2>
+                <form id="course-form">
+                    <input type="hidden" id="course-id">
+                    <label for="course-code">Code</label>
+                    <input type="text" id="course-code" required maxlength="20" placeholder="e.g. CS101">
+                    <label for="course-name">Name</label>
+                    <input type="text" id="course-name" required maxlength="200">
+                    <label for="course-credits">Credits</label>
+                    <input type="number" id="course-credits" required min="1" max="30">
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">Save</button>
+                        <button type="button" class="btn" id="course-cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>All Courses</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Credits</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="courses-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ENROLLMENTS ==================== -->
+    <section id="enrollments" class="tab-panel hidden">
+        <div class="panel-grid">
+            <div class="card">
+                <h2 id="enrollment-form-title">Enroll Student</h2>
+                <form id="enrollment-form">
+                    <input type="hidden" id="enrollment-id">
+                    <label for="enrollment-student">Student</label>
+                    <select id="enrollment-student" required></select>
+                    <label for="enrollment-course">Course</label>
+                    <select id="enrollment-course" required></select>
+                    <label for="enrollment-semester">Semester</label>
+                    <input type="number" id="enrollment-semester" required min="1" max="12">
+                    <label for="enrollment-grade">Grade (optional)</label>
+                    <input type="text" id="enrollment-grade" maxlength="5" placeholder="e.g. A, B+">
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">Save</button>
+                        <button type="button" class="btn" id="enrollment-cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>All Enrollments</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Semester</th>
+                            <th>Grade</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enrollments-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+
